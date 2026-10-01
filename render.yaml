@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: math-competition-hub
+    runtime: docker
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: math-hub-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SEARCH_PROVIDER
+        value: serper
+      - key: SERPER_API_KEY
+        sync: false
+databases:
+  - name: math-hub-db
+    plan: free
